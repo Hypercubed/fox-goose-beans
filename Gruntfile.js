@@ -136,9 +136,9 @@ module.exports = function (grunt) {
       }
     },
 
-    
 
-    
+
+
 
     // Renames files for browser caching purposes
     rev: {
@@ -315,6 +315,13 @@ module.exports = function (grunt) {
         configFile: 'karma.conf.js',
         singleRun: true
       }
+    },
+
+    'gh-pages': {
+      options: {
+        base: '<%= yeoman.dist %>'
+      },
+      src: ['**']
     }
   });
 
