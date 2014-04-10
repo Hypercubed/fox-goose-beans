@@ -15,6 +15,7 @@ html, body {
   bottom: 0;
   left: 0;
   right: 0;
+  overflow: hidden;
   -webkit-transition: all 3s ease;
   transition: all 3s ease;
 }
@@ -124,7 +125,7 @@ html, body {
 .item {
   border: 1px solid red;
   height: 23%;
-  margin: 5% 0;
+  margin-top: 5%;
   width: 100%;
 }
 
@@ -134,5 +135,9 @@ html, body {
 
 .item, #boat {
   cursor:pointer;
+}
+
+.pull-right {
+  float: right !important;
 }
 

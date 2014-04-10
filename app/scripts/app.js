@@ -129,7 +129,7 @@ angular.module('riverApp')
 
     $scope.itemClick = function(id, position) {
       if (position != $scope.boatPosition) {
-        $scope.row();
+        //$scope.row();
         return;
       }
 

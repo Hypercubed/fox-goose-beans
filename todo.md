@@ -7,3 +7,4 @@ _\( managed using [todo-md](https://github.com/Hypercubed/todo-md) \)_
 - [ ] Drag and drop?
 - [ ] stars
 - [ ] moon
+- [ ] Keyboard controls
