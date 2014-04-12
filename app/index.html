@@ -26,28 +26,38 @@
     <![endif]-->
 
     <!-- Add your site or application content here -->
-    <div id="world" ng-style="worldStyle" ng-controller="MainCtrl">
-      <div id="sun" ng-style="sunStyle" ng-cloak></div>
-      <div class="cloud" ng-style="{left: cloudLeft}"></div>
-      <h1 class="message" ng-bind="message"></h1>
-      <div id="ground">
-        <div class="left field">
-          <div class="item" ng-repeat="item in field[0] track by $index" ng-click="itemClick($index, 0)">
-            <h2 ng-cloak>{{item}}</h2>
+
+    <div id="universe" ng-controller="MainCtrl">
+      <div id="space" ng-style="spaceStyle"></div>
+      <div id="world" ng-class="dayphase">
+
+        <div id="sun" ng-style="sunStyle" ng-cloak></div>
+        <div class="box moonBox" ng-style="moonStyle" ng-cloak><div id="moon"></div></div>
+        {{time}} - {{dayphase}}
+        <div class="box cloudBox" ng-style="{left: cloudLeft}" ng-click="tick()"><div class="cloud"></div></div>
+        <h1 class="message animate-show" ng-show="message" ng-bind="message"></h1>
+        <div id="ground">
+          <div class="left field">
+            <div class="item" ng-repeat="item in field[0] track by $index" ng-click="itemClick($index, 0)">
+              <h2 ng-cloak>{{item}}</h2>
+            </div>
           </div>
-        </div>
-        <div id="river">
-          <div id="boat" ng-class="{right: boatPosition}" ng-click="row()">
-            <h3 ng-cloak class="payload">{{payload}}</h3>
+          <div id="river">
+            <div id="boat" ng-class="{right: boatPosition}" ng-click="row()">
+              <h3 ng-cloak class="payload">{{payload}}</h3>
+            </div>
           </div>
-        </div>
-        <div class="right field">
-          <div class="item" ng-repeat="item in field[1] track by $index" ng-click="itemClick($index, 1)">
-            <h2 ng-cloak>{{item}}</h2>
+          <div class="right field">
+            <div class="item" ng-repeat="item in field[1] track by $index" ng-click="itemClick($index, 1)">
+              <h2 ng-cloak>{{item}}</h2>
+            </div>
           </div>
         </div>
       </div>
     </div>
+
+
+
 
     <!-- Google Analytics: change UA-XXXXX-X to be your site's ID -->
      <script>
@@ -62,6 +72,7 @@
 
 
     <script src="bower_components/angular/angular.js"></script>
+    <script src="bower_components/angular-animate/angular-animate.js"></script>
 
         <!-- build:js({.tmp,app}) scripts/scripts.js -->
         <script src="scripts/app.js"></script>

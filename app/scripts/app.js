@@ -1,9 +1,9 @@
 'use strict';
 
-angular.module('riverApp', []);
+angular.module('riverApp', ['ngAnimate']);
 
 angular.module('riverApp')
-  .controller('MainCtrl', function ($scope, $interval) {
+  .controller('MainCtrl', function ($scope, $interval,$timeout) {
 
     var isGameOver = false;
 
@@ -14,57 +14,79 @@ angular.module('riverApp')
       left: '20%'
     }
 
+    $scope.moonStyle = {
+      top: '50%',
+      left: '20%'
+    }
+
     $scope.worldStyle = {
       backgroundColor: '#87CEEB'
     }
 
-    $scope.time = 2;
-
-    incTime();
-
-    function gameOver(msg) {
-      isGameOver = true;
-      $scope.message = msg;
-      $interval.cancel(stop);
+    $scope.spaceStyle = {
+      '-webkit-transform:rotate': "rotate(0deg)"
     }
 
-    function incTime() {
+    $scope.time = 6;
+    $scope.dayphase = 'day';
+
+    $scope.tick = function incTime() {
+
       console.log($scope.time);
 
-      if ($scope.time >= 22) {
+      if ($scope.time >= 23) {
+        end();
         return gameOver('Out of time');
       }
 
-      $scope.time %= 24;
+      $scope.dayphase =($scope.time > 19) ? 'night' : 'day';
 
-      var a = $scope.time / 12 * Math.PI;
+      $scope.cloudLeft = ($scope.time-4)/12 * 50+'%';
 
-      if ($scope.time >= 11) {
-        $scope.worldStyle.backgroundColor = '#000';
-        $scope.worldStyle.color = '#fff';
-      }
+      $scope.spaceStyle['-webkit-transform'] = "rotate("+($scope.time-6)/12*180+"deg)";
 
-      if ($scope.time < 14) {
-        $scope.sunStyle.top = 50 - Math.sin(a) * 50+'%';
-        $scope.sunStyle.left = $scope.time/12 * 100+'%';
-      }
+      var a = ($scope.time-6)/12*Math.PI;
+      $scope.sunStyle.top = 20 - Math.sin(a) * 20+'%';
+      $scope.sunStyle.left = ($scope.time-4)/12 * 80+'%';
 
-      $scope.cloudLeft = $scope.time/12 * 50+'%';
+      $scope.moonStyle.top = 20 - Math.sin(a-Math.PI-Math.PI/4) * 20+'%';
+      $scope.moonStyle.left = ($scope.time-4-12-3)/12 * 80+'%';
 
       $scope.time += 0.5;
 
     }
 
-    var stop = null;
+    $scope.tick();
+    //start();
 
+    function gameOver(msg) {
+      isGameOver = true;
+      flash(msg);
+      //console.log('stopping');
+      //$interval.cancel(stop);
+    }
+
+    function flash(msg) {
+      $scope.message = '';
+      $timeout(function() { $scope.message = msg; }, 100);
+    }
+
+    var stop;
     function start() {
-      incTime();
-      if (!stop) {
-        stop = $interval(incTime,2000);
+      if ( angular.isDefined(stop) ) return;
+
+      $scope.tick();
+      stop = $interval($scope.tick,2000);
+    }
+
+    function end() {
+      if (angular.isDefined(stop)) {
+        $interval.cancel(stop);
+        stop = undefined;
       }
     }
 
-    $scope.message = 'Get all the stuff across the river';
+    flash('Get all the stuff across the river before sunset.');
 
     $scope.boatPosition = 0;
     $scope.payload = "";
@@ -92,7 +114,8 @@ angular.module('riverApp')
 
       for (var i = 0; i < rules.length; i++) {
         if (f.indexOf(rules[i][0]) > -1 && f.indexOf(rules[i][1]) > -1) {
-          $scope.message = 'Watch out! '+rules[i][2];
+          flash('Watch out! '+rules[i][2]);
+          //$scope.message = 'Watch out! '+rules[i][2];
           return false;
         }
       }
@@ -101,6 +124,7 @@ angular.module('riverApp')
 
     function isWin(f, pos) {
       if (pos == 1 && f.indexOf('') < 0) {
+        end();
         gameOver('You win!');
         return true;
       }
