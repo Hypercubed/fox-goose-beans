@@ -109,14 +109,16 @@ html, body {
 
 .cloudBox {
   top: 10%;
-  filter:alpha(opacity=80);
-  opacity:0.8;
+  left: 5%;
+  right: 5%;
   z-index: 6;
 }
 
   .cloud {
     width: 100px; height: 30px;
     background: #fff;
+    filter:alpha(opacity=80);
+    opacity:0.8;
 
     border-radius: 200px;
     -moz-border-radius: 200px;
@@ -215,10 +217,9 @@ html, body {
 }
 
 .item {
-  border: 1px solid red;
   height: 23%;
   margin-top: 5%;
-  width: 100%;
+  width: 80%;
 }
 
 .item > h2 {
@@ -256,4 +257,13 @@ html, body {
   line-height:0;
   opacity:0;
   padding:0 10px;
+}
+
+.debugBox {
+  border: 1px solid red;
+}
+
+.img-responsive {
+  max-width: 100%;
+  height: auto;
 }

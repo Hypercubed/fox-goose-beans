@@ -27,21 +27,19 @@ angular.module('riverApp')
       '-webkit-transform:rotate': "rotate(0deg)"
     }
 
-    $scope.time = 6;
+    $scope.time = 6;   // Todo: make 0 - 1or 0 - 12
     $scope.dayphase = 'day';
 
     $scope.tick = function incTime() {
 
       console.log($scope.time);
 
-      if ($scope.time >= 23) {
-        end();
-        return gameOver('Out of time');
-      }
+      if ($scope.time == 19) flash('Hurry up, the sun is setting');
+      if ($scope.time == 21) flash('It\'s getting too dark to travel');
 
-      $scope.dayphase =($scope.time > 19) ? 'night' : 'day';
+      $scope.dayphase = ($scope.time > 19) ? 'night' : 'day';
 
-      $scope.cloudLeft = ($scope.time-4)/12 * 50+'%';
+      $scope.cloudLeft = ($scope.time-6)/18 * 100 +'%';
 
       $scope.spaceStyle['-webkit-transform'] = "rotate("+($scope.time-6)/12*180+"deg)";
 
@@ -54,12 +52,17 @@ angular.module('riverApp')
 
       $scope.time += 0.5;
 
+      if ($scope.time >= 24) {
+        gameOver('Out of time');
+      }
+
     }
 
     $scope.tick();
     //start();
 
     function gameOver(msg) {
+      end();
       isGameOver = true;
       flash(msg);
       //console.log('stopping');
@@ -101,13 +104,24 @@ angular.module('riverApp')
         return array;
     }
 
+    function ITEM(id, img) {
+      return {
+        id: id,
+        img: img
+      }
+    }
+
+    var fox = ITEM('The fox','http://placehold.it/350x150&text=fox');
+    var goose = ITEM('The goose','http://placehold.it/350x150&text=goose');
+    var beans = ITEM('A bag of beans','http://placehold.it/350x150&text=beans');
+
     $scope.field = [];
-    $scope.field[0] = shuffleArray(["The fox","The goose","A bag of beans"]);
+    $scope.field[0] = shuffleArray([fox,goose,beans]);
     $scope.field[1] = ["","",""];
 
     var rules = [
-      ["The fox","The goose","The fox will eat the goose!"],
-      ["The goose","A bag of beans","The goose will eat the bag of beans!"]
+      [fox,goose,"The fox will eat the goose!"],
+      [goose,beans,"The goose will eat the bag of beans!"]
     ]
 
     function isSafe(f) {

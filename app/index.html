@@ -32,32 +32,33 @@
       <div id="world" ng-class="dayphase">
 
         <div id="sun" ng-style="sunStyle" ng-cloak></div>
-        <div class="box moonBox" ng-style="moonStyle" ng-cloak><div id="moon"></div></div>
+        <div class="box moonBox" ng-style="moonStyle" ng-cloak>
+          <div id="moon"></div>
+        </div>
         {{time}} - {{dayphase}}
-        <div class="box cloudBox" ng-style="{left: cloudLeft}" ng-click="tick()"><div class="cloud"></div></div>
+        <div class="box cloudBox debugBox" ng-click="tick()">
+          <div class="cloud box" ng-style="{left: cloudLeft}"></div>
+        </div>
         <h1 class="message animate-show" ng-show="message" ng-bind="message"></h1>
         <div id="ground">
           <div class="left field">
-            <div class="item" ng-repeat="item in field[0] track by $index" ng-click="itemClick($index, 0)">
-              <h2 ng-cloak>{{item}}</h2>
+            <div class="item debugBox" ng-repeat="item in field[0] track by $index" ng-click="itemClick($index, 0)">
+              <img ng-src="{{item.img}}" class="img-responsive" ng-show="item.img"></img>
             </div>
           </div>
           <div id="river">
             <div id="boat" ng-class="{right: boatPosition}" ng-click="row()">
-              <h3 ng-cloak class="payload">{{payload}}</h3>
+              <img ng-src="{{payload.img}}" class="img-responsive" ng-show="payload.img"></img>
             </div>
           </div>
           <div class="right field">
-            <div class="item" ng-repeat="item in field[1] track by $index" ng-click="itemClick($index, 1)">
-              <h2 ng-cloak>{{item}}</h2>
+            <div class="item debugBox" ng-repeat="item in field[1] track by $index" ng-click="itemClick($index, 1)">
+              <img ng-src="{{item.img}}" class="img-responsive" ng-show="item.img"></img>
             </div>
           </div>
         </div>
       </div>
     </div>
-
-
-
 
     <!-- Google Analytics: change UA-XXXXX-X to be your site's ID -->
      <script>
