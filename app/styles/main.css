@@ -7,10 +7,16 @@ html, body {
   display: none !important;
 }
 
-#universe {
-  background-color: black;
+.box {
   position: absolute;
-  color: white;
+  background-color: transparent;
+  -webkit-transition: all 2s linear;
+  transition: all 2s linear;
+}
+
+.fill {
+  position: absolute;
+  background-color: transparent;
   top: 0;
   bottom: 0;
   left: 0;
@@ -18,11 +24,9 @@ html, body {
   overflow: hidden;
 }
 
-.box {
-  position: absolute;
-  background-color: transparent;
-  -webkit-transition: all 2s linear;
-  transition: all 2s linear;
+#universe {
+  background-color: black;
+  color: white;
 }
 
 #space {
@@ -35,9 +39,6 @@ html, body {
   right: -100%;
   -webkit-transition: all 2s linear;
   transition: all 2s linear;
-  /* transform:rotate(7deg);
-  -ms-transform:rotate(7deg); /* IE 9 */
-  /* -webkit-transform:rotate(7deg); /* Opera, Chrome, and Safari */
 }
 
 #sun {
@@ -56,56 +57,48 @@ html, body {
 
 #moonBox {
   z-index: 1;
-      width: 100px;
-      height: 100px;
-      border-radius:50px;
-      overflow: hidden;
+  width: 100px;
+  height: 100px;
+  border-radius:50px;
+  overflow: hidden;
 }
 
   #moon {
-      width: 100px;
-      height: 100px;
-      background-color: #fff;
-      border-radius:50px;
-      position: relative;
+    width: 100px;
+    height: 100px;
+    background-color: #fff;
+    border-radius:50px;
+    position: relative;
   }
 
   #moon:before {
-      content: "";
-      width:90px;
-      height: 90px;
-      display: block;
-      position: absolute;
-      border-radius: 45px;
-      right: -10px;
-      top: 7px;
-      background: #000;
-      border: 2px solid #000;
+    content: "";
+    width:90px;
+    height: 90px;
+    display: block;
+    position: absolute;
+    border-radius: 45px;
+    right: -10px;
+    top: 7px;
+    background: #000;
+    border: 2px solid #000;
   }
 
 
 #world {
   background-color: skyblue;
   color: black;
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  overflow: hidden;
-  -webkit-transition: all 5s ease;
-  transition: all 5s ease;
 }
 
-#world.night {
-  background-color: transparent;
-  color: white;
-}
+  #world.night {
+    background-color: transparent;
+    color: white;
+  }
 
-#world .message {
-  position: absolute;
-  z-index: 100;
-}
+  #world .message {
+    position: absolute;
+    z-index: 100;
+  }
 
 .cloudBox {
   top: 10%;
@@ -157,11 +150,7 @@ html, body {
 
 #ground {
   background-color: green;
-  position: absolute;
   top: 30%;
-  bottom: 0;
-  left: 0;
-  right: 0;
   z-index: 6;
 }
 
@@ -174,11 +163,11 @@ html, body {
   right: 30%;
 }
 
-#boat {
-  background-color: brown;
+#boatBox {
+  background-color: transparent;
   position: absolute;
   width: 20%;
-  height: 10%;
+  height: 30%;
   top: 50%;
   left: 5%;
   -webkit-transition: left 2s;
@@ -189,50 +178,60 @@ html, body {
   border-radius: 5px;
 }
 
-#boat.right {
-  background-color: brown;
-  position: absolute;
-  width: 20%;
-  height: 10%;
-  top: 50%;
-  left: 75%;
+  #boatBox.right {
+    left: 75%;
+  }
+
+.boat {
+  border-color: brown transparent transparent transparent;
+  border-style:solid;
+  border-width:20px;
+}
+
+.payload {
+  width: 100%;
+  height: 50%;
 }
 
 .field {
-  /* border: 1px solid black; */
-  position: absolute;
-  top: 5%;
-  bottom: 5%;
   color: #000;
 }
 
-.field.left {
-  left: 1%;
-  right: 71%;
-}
+  .field.left {
+    left: 1%;
+    right: 71%;
+  }
 
-.field.right  {
-  right: 1%;
-  left: 71%;
-}
+  .field.right  {
+    right: 1%;
+    left: 71%;
+  }
 
-.item {
+.field .item {
   height: 23%;
-  margin-top: 5%;
-  width: 80%;
+  margin: 5% 2% 0 2%;
+  width: 30%;
+  float: right;
 }
 
-.item > h2 {
-  margin-top: 11%;
-}
+  .field.right .item {
+    float: left;
+  }
 
-.item, #boat {
+  .field.left .item {
+    float: right;
+  }
+
+.field, .item, #boat {
   cursor:pointer;
 }
 
 .pull-right {
   float: right !important;
 }
+
+
+/* Animation */
 
 .animate-show {
   line-height:20px;
@@ -249,17 +248,20 @@ html, body {
 
 .animate-show.ng-hide-add.ng-hide-add-active,
 .animate-show.ng-hide-remove.ng-hide-remove-active {
-  -webkit-transition:all linear 0.5s;
-  transition:all linear 0.5s;
+  -webkit-transition:all linear 0.1s;
+  transition:all linear 0.1s;
 }
 
 .animate-show.ng-hide {
   line-height:0;
   opacity:0;
   padding:0 10px;
+  -webkit-transition:all linear 0.1s;
+  transition:all linear 0.1s;
 }
 
-.debugBox {
+/* */
+.debug .debugBox {
   border: 1px solid red;
 }
 

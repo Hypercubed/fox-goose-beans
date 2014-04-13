@@ -27,32 +27,35 @@
 
     <!-- Add your site or application content here -->
 
-    <div id="universe" ng-controller="MainCtrl">
-      <div id="space" ng-style="spaceStyle"></div>
-      <div id="world" ng-class="dayphase">
+    <div id="universe" class="fill" ng-controller="MainCtrl" ng-class="{debug: debug}">
+      <div id="space" class="box" ng-style="spaceStyle"></div>
+      <div id="world" class="fill" ng-class="dayphase">
 
         <div id="sun" ng-style="sunStyle" ng-cloak></div>
         <div class="box moonBox" ng-style="moonStyle" ng-cloak>
           <div id="moon"></div>
         </div>
-        {{time}} - {{dayphase}}
-        <div class="box cloudBox debugBox" ng-click="tick()">
+        <div ng-show="debug" ng-cloak>{{time}} - {{dayphase}}</div>
+        <div class="box cloudBox debugBox" ng-click="debug && tick()">
           <div class="cloud box" ng-style="{left: cloudLeft}"></div>
         </div>
-        <h1 class="message animate-show" ng-show="message" ng-bind="message"></h1>
-        <div id="ground">
-          <div class="left field">
-            <div class="item debugBox" ng-repeat="item in field[0] track by $index" ng-click="itemClick($index, 0)">
+        <h1 flash="message"></h1>
+        <div id="ground" class="fill">
+          <div class="left field fill debugBox" ng-click="fieldClick(0)">
+            <div class="item debugBox" ng-repeat="item in field[0] track by $index" ng-click="itemClick($index, 0); $event.stopPropagation();">
               <img ng-src="{{item.img}}" class="img-responsive" ng-show="item.img"></img>
             </div>
           </div>
           <div id="river">
-            <div id="boat" ng-class="{right: boatPosition}" ng-click="row()">
-              <img ng-src="{{payload.img}}" class="img-responsive" ng-show="payload.img"></img>
+            <div id="boatBox" class="box debugBox" ng-class="{right: boatPosition}" ng-click="row()">
+              <div class="payload">
+                <img ng-src="{{payload.img}}" class="img-responsive" ng-show="payload.img"></img>
+              </div>
+              <div class="boat"></div>
             </div>
           </div>
-          <div class="right field">
-            <div class="item debugBox" ng-repeat="item in field[1] track by $index" ng-click="itemClick($index, 1)">
+          <div class="right field fill debugBox" ng-click="fieldClick(1)">
+            <div class="item debugBox" ng-repeat="item in field[1] track by $index" ng-click="itemClick($index, 1); $event.stopPropagation();">
               <img ng-src="{{item.img}}" class="img-responsive" ng-show="item.img"></img>
             </div>
           </div>
@@ -77,6 +80,8 @@
 
         <!-- build:js({.tmp,app}) scripts/scripts.js -->
         <script src="scripts/app.js"></script>
+        <script src="scripts/mainCtrl.js"></script>
+        <script src="scripts/flashDirective.js"></script>
         <!-- endbuild -->
 </body>
 </html>
