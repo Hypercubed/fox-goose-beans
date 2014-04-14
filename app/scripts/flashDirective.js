@@ -9,7 +9,7 @@
           flash: '=flash'
         },
         template: '<div class="message animate-show" ng-show="show" ng-bind="message"></div>',
-        link: function(scope, element, attrs) {
+        link: function(scope) {
 
           scope.show = false;
 

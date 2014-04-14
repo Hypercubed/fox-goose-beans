@@ -8,3 +8,10 @@ _\( managed using [todo-md](https://github.com/Hypercubed/todo-md) \)_
 - [ ] stars
 - [ ] moon
 - [ ] Keyboard controls
+- [ ] Start using controllerAs
+- [ ] Add  to scope
+- [ ] Rename  to GameManager
+- [ ] Move GameManager to js
+- [ ] Tests?
+- [ ] Create gameBoardService
+- [ ] Use less?

@@ -4,7 +4,7 @@
 
   var app = angular.module('riverApp', ['ngAnimate']);
 
-  app.constant('DEBUG', true);
+  app.constant('DEBUG', false);
 
   app.config(function($logProvider, DEBUG) {
     $logProvider.debugEnabled(DEBUG);

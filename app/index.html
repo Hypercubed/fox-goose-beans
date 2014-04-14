@@ -43,7 +43,7 @@
         <div id="ground" class="fill">
           <div class="left field fill debugBox" ng-click="fieldClick(0)">
             <div class="item debugBox" ng-repeat="item in field[0] track by $index" ng-click="itemClick($index, 0); $event.stopPropagation();">
-              <img ng-src="{{item.img}}" class="img-responsive" ng-show="item.img"></img>
+              <img ng-src="{{item.img}}" alt="{{item.name}}" title="{{item.name}}" class="img-responsive" ng-show="item.img"></img>
             </div>
           </div>
           <div id="river">
