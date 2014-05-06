@@ -11,7 +11,7 @@
     <meta name="viewport" content="width=device-width">
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
 
-        <link rel="stylesheet" href="styles/28e00fb3.main.css"/>
+        <link rel="stylesheet" href="styles/b0df76c5.main.css"/>
 </head>
   <body ng-app="riverApp">
     <!--[if lt IE 7]>
@@ -27,23 +27,31 @@
 
     <div id="universe" class="fill" ng-controller="MainCtrl" ng-class="{debug: debug}">
       <div id="space" class="box" ng-style="spaceStyle"></div>
-      <div id="world" class="fill" ng-class="dayphase">
+      <div id="world" class="fill" ng-class="{ false: 'day', true: 'night' }[(time > 19)]">
 
-        <div id="sun" ng-style="sunStyle" ng-cloak=""></div>
-        <div class="box moonBox" ng-style="moonStyle" ng-cloak="">
-          <div id="moon"></div>
+        <div id="sunBox" ng-style="sunStyle" ng-cloak="">
+          <div id="sun" class="round square"></div>
         </div>
-        <div ng-show="debug" ng-cloak="">{{time}} - {{dayphase}}</div>
-        <div class="box cloudBox debugBox" ng-click="debug && tick()">
-          <div class="cloud box" ng-style="{left: cloudLeft}"></div>
+
+        <div id="moonBox" class="box round" ng-style="moonStyle" ng-cloak="">
+          <div id="moon" class="square round"></div>
         </div>
-        <h1 flash="message"></h1>
+
+        <div ng-show="debug" ng-cloak="">{{time}} - {{(time > 19) ? 'night' : 'day' }}</div>
+
+        <div id="hills">
+          <div class="hill"></div>
+          <div class="hill"></div>
+        </div>
+
+        <h1 id="message" flash="message"></h1>
+
+        <div id="cloudBox" class="cloudBox debugBox" ng-click="cloudClick($event)">
+          <div class="cloud box" ng-style="{left: (time-6)/(24-6)*100+'%'}" ng-click="$event.stopPropagation();"></div>
+        </div>
+
         <div id="ground" class="fill">
-          <div class="left field fill debugBox" ng-click="fieldClick(0)">
-            <div class="item debugBox" ng-repeat="item in field[0] track by $index" ng-click="itemClick($index, 0); $event.stopPropagation();">
-              <img ng-src="{{item.img}}" class="img-responsive" ng-show="item.img">
-            </div>
-          </div>
+
           <div id="river">
             <div id="boatBox" class="box debugBox" ng-class="{right: boatPosition}" ng-click="row()">
               <div class="payload">
@@ -52,6 +60,15 @@
               <div class="boat"></div>
             </div>
           </div>
+
+          <div class="left field fill debugBox" ng-click="fieldClick(0)">
+            <div class="itemsBox">
+              <div class="item debugBox" ng-repeat="item in field[0] track by $index" ng-click="itemClick($index, 0); $event.stopPropagation();">
+                <img ng-src="{{item.img}}" alt="{{item.name}}" title="{{item.name}}" class="img-responsive" ng-show="item.img">
+              </div>
+            </div>
+          </div>
+
           <div class="right field fill debugBox" ng-click="fieldClick(1)">
             <div class="item debugBox" ng-repeat="item in field[1] track by $index" ng-click="itemClick($index, 1); $event.stopPropagation();">
               <img ng-src="{{item.img}}" class="img-responsive" ng-show="item.img">
@@ -76,6 +93,6 @@
     <script src="bower_components/angular/angular.js"></script>
     <script src="bower_components/angular-animate/angular-animate.js"></script>
 
-        <script src="scripts/0e960bc5.scripts.js"></script>
+        <script src="scripts/9e777011.scripts.js"></script>
 </body>
 </html>
