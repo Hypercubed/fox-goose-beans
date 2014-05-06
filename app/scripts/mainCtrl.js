@@ -74,8 +74,8 @@
         '-webkit-transform:rotate': 'rotate(0deg)'
       };
 
-      $scope.time = 6;   // Todo: make 0 - 1or 0 - 12
-      $scope.dayphase = 'day';
+      $scope.time = 6;   // Todo: this can be done better
+      //$scope.dayphase = 'day';
 
       $scope.tick = function incTime() {
 
@@ -84,18 +84,21 @@
         if ($scope.time === 19) {$scope.message = 'Hurry up, the sun is setting';}
         if ($scope.time === 21) {$scope.message = 'It\'s getting too dark to travel';}
 
-        $scope.dayphase = ($scope.time > 19) ? 'night' : 'day';
+        //$scope.dayphase = ($scope.time > 19) ? 'night' : 'day';
 
-        $scope.cloudLeft = ($scope.time-6)/18 * 100 +'%';
+        //$scope.cloudLeft = ($scope.time-6)/(24-6) * 100 +'%';
 
-        $scope.spaceStyle['-webkit-transform'] = 'rotate('+($scope.time-6)/12*180+'deg)';
+        var b = ($scope.time-6)/12;
+        var a = b*Math.PI;
 
-        var a = ($scope.time-6)/12*Math.PI;
-        $scope.sunStyle.top = 20 - Math.sin(a) * 20+'%';
-        $scope.sunStyle.left = ($scope.time-4)/12 * 80+'%';
+        $scope.spaceStyle['-webkit-transform'] = 'rotate('+a+'rad)';
 
-        $scope.moonStyle.top = 20 - Math.sin(a-Math.PI-Math.PI/4) * 20+'%';
-        $scope.moonStyle.left = ($scope.time-4-12-3)/12 * 80+'%';
+        $scope.sunStyle.top = (1 - Math.sin(a) )*20+'%';
+        $scope.sunStyle.left = ( b + 1/6)*80+'%';
+        //console.log(($scope.time-4)/12*0.80, 0.5+Math.cos(a));
+
+        $scope.moonStyle.top = ( 1 + Math.sin(a-Math.PI/4) )*20+'%';
+        $scope.moonStyle.left = ( b - 1/6 - 1)*80+'%';
 
         $scope.time += 0.5;
 
@@ -206,6 +209,11 @@
         isDisabled = true;
         $timeout(function() { isDisabled = false; }, 1500);
 
+      };
+
+      $scope.cloudClick = function($event) {
+        $scope.time = $event.offsetX/$event.target.offsetWidth*18+5;  // Do this better
+        $scope.tick();
       };
 
     });

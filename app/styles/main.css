@@ -14,6 +14,18 @@ html, body {
   transition: all 2s linear;
 }
 
+.square {  /* Makes square */
+   width: 100%;
+   height: 0;
+   padding-bottom: 100%;
+}
+
+.round {
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  border-radius: 50%;
+}
+
 .fill {
   position: absolute;
   background-color: transparent;
@@ -41,53 +53,53 @@ html, body {
   transition: all 2s linear;
 }
 
-#sun {
-  background-color: yellow;
+#sunBox {
+  width: 8%;
   position: absolute;
-  width: 100px;
-  height: 100px;
-  -webkit-border-radius: 50px;
-  -moz-border-radius: 50px;
-  border-radius: 50px;
-  box-shadow: 0px 0px 0px 8px rgba(255, 255, 0, .1);
   -webkit-transition: all 2s linear;
   transition: all 2s linear;
-  z-index: 1;
 }
+
+  #sun {
+    background-color: yellow;
+    box-shadow: 0px 0px 0px 8px rgba(255, 255, 0, .1);
+  }
 
 #moonBox {
-  z-index: 1;
-  width: 100px;
-  height: 100px;
-  border-radius:50px;
+  width: 7%;
   overflow: hidden;
+  opacity: 0;
 }
 
+  .night #moonBox {
+    opacity: 1;
+  }
+
   #moon {
-    width: 100px;
-    height: 100px;
     background-color: #fff;
-    border-radius:50px;
     position: relative;
   }
 
   #moon:before {
     content: "";
-    width:90px;
-    height: 90px;
+    width: 100%;
+    height: 100%;
+    padding-bottom; 100%
     display: block;
     position: absolute;
-    border-radius: 45px;
-    right: -10px;
-    top: 7px;
+    border-radius: 50%;
+    right: -20%;
+    top: 7%;
     background: #000;
-    border: 2px solid #000;
+    opacity: 0.92;
   }
-
 
 #world {
   background-color: skyblue;
   color: black;
+  -webkit-transition: background-color 4s linear;
+  transition: background-color 4s linear;
+  margin-top: 0;
 }
 
   #world.night {
@@ -95,16 +107,14 @@ html, body {
     color: white;
   }
 
-  #world .message {
-    position: absolute;
-    z-index: 100;
-  }
+#message {
+  position: relative;
+}
 
 .cloudBox {
   top: 10%;
   left: 5%;
   right: 5%;
-  z-index: 6;
 }
 
   .cloud {
@@ -145,21 +155,52 @@ html, body {
 #world .message, .item > h2, #boat > .payload {
   width: 100%;
   text-align: center;
-  z-index: 1000;
 }
 
 #ground {
-  background-color: green;
-  top: 30%;
+  background-color: #feb13d;
+  top: 50%;
   z-index: 6;
 }
 
+#hills {
+  position: absolute;
+  top: 30%;
+  height: 100%;
+  width: 100%;
+}
+
+
+  .hill {
+    position: absolute;
+    margin-left: 5%;
+    background-color: #498a6d;
+    border-radius: 20%;
+    -webkit-transform: rotate(45deg);
+    transform: rotate(45deg);
+    -moz-transform: rotate(45deg);
+
+   width: 50%;  /* Makes square */
+   height: 0;
+   padding-bottom: 50%;
+
+  }
+
+  #hills .hill:nth-child(1) {
+    left: 30%;
+    top: 15%;
+    background-color: #7ec172;
+    border-radius: 10%;
+  }
+
 #river {
-  background-color: blue;
+  background-image:url('../images/river.png');
+  background-repeat:no-repeat;
+  background-size:100% 100%;
   position: absolute;
   top: 0;
   bottom: 0;
-  left: 30%;
+  left: 20%;
   right: 30%;
 }
 
@@ -169,7 +210,7 @@ html, body {
   width: 20%;
   height: 30%;
   top: 50%;
-  left: 5%;
+  left: 20%;
   -webkit-transition: left 2s;
   transition: left 2s;
   color: #000;
@@ -179,7 +220,7 @@ html, body {
 }
 
   #boatBox.right {
-    left: 75%;
+    left: 80%;
   }
 
 .boat {
@@ -189,12 +230,17 @@ html, body {
 }
 
 .payload {
-  width: 100%;
-  height: 50%;
+  width: 50%;
+  height: 30%;
+  bottom: 50%;
+  margin-top: 50%;
+  margin-left: 50%;
 }
 
 .field {
   color: #000;
+  top: 30%;
+  bottom: 10%;
 }
 
   .field.left {
@@ -208,10 +254,11 @@ html, body {
   }
 
 .field .item {
-  height: 23%;
+  height: 20%;
   margin: 5% 2% 0 2%;
-  width: 30%;
+  width: 20%;
   float: right;
+  clear: both;
 }
 
   .field.right .item {
@@ -234,9 +281,9 @@ html, body {
 /* Animation */
 
 .animate-show {
-  line-height:20px;
   opacity:1;
-  padding:10px;
+  /* padding: 0 10px;
+  margin: 10px 0 0 0; */
   -webkit-transition:all linear 0.5s;
   transition:all linear 0.5s;
 }
@@ -253,9 +300,9 @@ html, body {
 }
 
 .animate-show.ng-hide {
-  line-height:0;
   opacity:0;
-  padding:0 10px;
+  /*padding: 0 10px;
+  margin: 0 0 10px 0;*/
   -webkit-transition:all linear 0.1s;
   transition:all linear 0.1s;
 }
